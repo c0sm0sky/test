@@ -1,1 +1,6 @@
 language: java
+script: mvn clean install --fail-at-end
+matrix:
+  include:
+  - jdk: openjdk7
+    env: JACOCO=true
