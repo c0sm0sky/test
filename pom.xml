@@ -8,6 +8,19 @@
     <artifactId>kalkulator</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <issueManagement>
+        <system>GitHub Issues</system>
+        <url>https://github.com/c0sm0sky/test/issues</url>
+    </issueManagement>
+
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>https://travis-ci.org/c0sm0sky/test</url>
+    </ciManagement>
 
     <!--<parent>-->
     <!--<groupId>pl.gov.coi</groupId>-->
@@ -66,62 +79,35 @@
                 </plugins>
             </build>
         </profile>
-        <!--<profile>-->
-        <!--<id>ci</id>-->
-        <!--<build>-->
-        <!--<plugins>-->
-        <!--<plugin>-->
-        <!--<groupId>org.jacoco</groupId>-->
-        <!--<artifactId>jacoco-maven-plugin</artifactId>-->
-        <!--<version>0.7.7.201606060606</version>-->
-        <!--<executions>-->
-        <!--<execution>-->
-        <!--<id>pre-unit-test</id>-->
-        <!--<goals>-->
-        <!--<goal>prepare-agent</goal>-->
-        <!--</goals>-->
-        <!--<configuration>-->
-        <!--<destFile>${project.basedir}/target/jacoco.exec</destFile>-->
-        <!--</configuration>-->
-        <!--</execution>-->
-        <!--<execution>-->
-        <!--<id>post-unit-test</id>-->
-        <!--<phase>test</phase>-->
-        <!--<goals>-->
-        <!--<goal>report</goal>-->
-        <!--</goals>-->
-        <!--<configuration>-->
-        <!--<dataFile>${project.basedir}/target/jacoco.exe</dataFile>-->
-        <!--<outputDirectory>${project.basedir}/target/site</outputDirectory>-->
-        <!--</configuration>-->
-        <!--</execution>-->
-        <!--<execution>-->
-        <!--<id>pre-integration-test</id>-->
-        <!--<phase>pre-integration-test</phase>-->
-        <!--<goals>-->
-        <!--<goal>prepare-agent</goal>-->
-        <!--</goals>-->
-        <!--<configuration>-->
-        <!--<destFile>${project.basedir}/target/jacoco-it.exe</destFile>-->
-        <!--<propertyName>test.failsafe.argLine</propertyName>-->
-        <!--</configuration>-->
-        <!--</execution>-->
-        <!--<execution>-->
-        <!--<id>post-integration-test</id>-->
-        <!--<phase>post-integration-test</phase>-->
-        <!--<goals>-->
-        <!--<goal>report</goal>-->
-        <!--</goals>-->
-        <!--<configuration>-->
-        <!--<dataFile>${project.basedir}/target/jacoco-it.exec</dataFile>-->
-        <!--<outputDirectory>${project.basedir}/target/site</outputDirectory>-->
-        <!--</configuration>-->
-        <!--</execution>-->
-        <!--</executions>-->
-        <!--</plugin>-->
-        <!--</plugins>-->
-        <!--</build>-->
-        <!--</profile>-->
+
+        <profile>
+            <id>coveralls</id>
+            <activation>
+                <property>
+                    <name>env.COVERALLS</name>
+                    <value>true</value>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>3.1.0</version>
+                        <executions>
+                            <execution>
+                                <id>coveralls-default</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
     </profiles>
 
 
